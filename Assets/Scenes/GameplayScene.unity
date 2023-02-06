@@ -287,6 +287,12 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!20 &1518945932 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6379215764956917184, guid: 411d319935398b742a99a4e16e2a1c72,
+    type: 3}
+  m_PrefabInstance: {fileID: 6379215765167437833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6379215765167437833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -521,6 +527,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 680904936443782896, guid: 9f725a13e7593c647a18c381d4817e70,
+        type: 3}
+      propertyPath: _currentCamera
+      value: 
+      objectReference: {fileID: 1518945932}
     - target: {fileID: 3074768972495466845, guid: 9f725a13e7593c647a18c381d4817e70,
         type: 3}
       propertyPath: m_Name
