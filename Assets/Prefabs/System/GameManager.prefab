@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _instancedGameObjects:
   - {fileID: 1356007662285870144, guid: 4cbdf9eec73291d4a9008a40d42f3f08, type: 3}
+  _scriptableObjects:
+  - {fileID: 11400000, guid: cf1d9539617811b4ca13625873fa9a5c, type: 2}

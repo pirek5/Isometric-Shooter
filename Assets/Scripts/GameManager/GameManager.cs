@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 	private void Awake()
 	{
 		InstantiateSystems();
-		
+		CreateScriptableObjectsCollection();
 		InjectDependencies();
 		InitializeSystems();
 		CallOnSystemsInitialized();
@@ -46,6 +46,25 @@ public class GameManager : MonoBehaviour
 			{
 				_instancedSystems.Add(instancedSystem.Type, instancedSystem);
 			}
+		}
+	}
+	
+	private void CreateScriptableObjectsCollection()
+	{
+		_scriptableObjectsToInject = new Dictionary<Type, ScriptableObject>();
+
+		foreach (ScriptableObject scriptableObject in _scriptableObjects)
+		{
+			TryAddAsScriptableObject(scriptableObject);
+		}
+	}
+	
+	private void TryAddAsScriptableObject(ScriptableObject scriptableObject)
+	{
+		Type type = scriptableObject.GetType();
+		if (!_scriptableObjectsToInject.ContainsKey(type))
+		{
+			_scriptableObjectsToInject.Add(type, scriptableObject);
 		}
 	}
 
