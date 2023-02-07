@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace IsoShooter.Weapons
@@ -6,6 +7,8 @@ namespace IsoShooter.Weapons
     [CreateAssetMenu(menuName = "IsometricShooter/WeaponsDatabase")]
     public class WeaponsDatabase : ScriptableObject
     {
+        private static readonly string databasePath = "Assets/Data/WeaponsDatabase.asset"; //not ideal solution
+        
         [SerializeField]
         private List<GameObject> _weaponsDefinitions;
     
@@ -24,8 +27,7 @@ namespace IsoShooter.Weapons
                 return _availableWeapons;
             }
         }
-    
-    
+
         public Weapon GetWeaponPrefab(string weaponId)
         {
             if (AvailableWeapons.ContainsKey(weaponId) == false)
@@ -48,6 +50,29 @@ namespace IsoShooter.Weapons
                 }
             }
         }
+        
+#if UNITY_EDITOR
+        public static List<string> GetAllWeaponsIds()
+        {
+            WeaponsDatabase database = GetCurrentDatabase();
+
+            List<string> allWeaponIds = new ();
+            foreach (GameObject definition in database._weaponsDefinitions)
+            {
+                if(definition.TryGetComponent(out Weapon weapon))
+                {
+                    allWeaponIds.Add(weapon.WeaponId);
+                }
+            }
+
+            return allWeaponIds;
+        }
+        
+        private static WeaponsDatabase GetCurrentDatabase()
+        {
+            return AssetDatabase.LoadAssetAtPath<WeaponsDatabase>(databasePath);
+        }
+#endif
     }
 }
 
