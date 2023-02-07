@@ -12,9 +12,7 @@ namespace IsoShooter.Player
         
         [SerializeField]
         private Camera _currentCamera;
-        [SerializeField]
-        private Transform _playerTransform;
-        
+
         [Inject]
         private InputManager _inputManager;
 

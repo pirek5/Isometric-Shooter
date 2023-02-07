@@ -150,9 +150,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7e5f6b150668bb40b9864dfdae9e6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 2251273782986214259}
-  weaponController: {fileID: 7215956449823204601}
-  playerSettings: {fileID: 11400000, guid: dec27d0fe00ed244caeab219452ee4df, type: 2}
+  _playerMovement: {fileID: 2251273782986214259}
+  _weaponController: {fileID: 7215956449823204601}
+  _playerSettings: {fileID: 11400000, guid: dec27d0fe00ed244caeab219452ee4df, type: 2}
 --- !u!114 &680904936443782896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentCamera: {fileID: 0}
-  _playerTransform: {fileID: 6280195901054651635}
 --- !u!114 &2251273782986214259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,8 +179,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidBody: {fileID: 5830398920776922657}
-  _character: {fileID: 6280195901054651635}
-  _playerSettings: {fileID: 11400000, guid: dec27d0fe00ed244caeab219452ee4df, type: 2}
 --- !u!114 &7215956449823204601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +192,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectedWeapon: Rifle
-  _weaponsDatabase: {fileID: 11400000, guid: cf1d9539617811b4ca13625873fa9a5c, type: 2}
   _weaponSlot: {fileID: 8593770796464887126}
 --- !u!33 &2221959981000900746
 MeshFilter:

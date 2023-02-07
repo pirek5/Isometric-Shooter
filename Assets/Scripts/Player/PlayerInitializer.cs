@@ -1,29 +1,31 @@
 using IsoShooter.Weapons;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace IsoShooter.Player
 {
     public class PlayerInitializer : MonoBehaviour, ISceneInjectee
     {
         [SerializeField]
-        private PlayerMovement playerMovement;
+        private PlayerMovement _playerMovement;
         [SerializeField]
-        private PlayerWeaponController weaponController;
+        private PlayerWeaponController _weaponController;
         [SerializeField]
-        private PlayerSettings playerSettings;
+        private PlayerSettings _playerSettings;
         [Inject]
-        private WeaponsDatabase weaponsDatabase;
+        private WeaponsDatabase _weaponsDatabase;
         
-        private void OnDestroy()
-        {
-            weaponController.CleanUp();
-        }
-
+        
         public void OnInjected()
         {
             ICharacterInput input = GetComponent<ICharacterInput>();
-            playerMovement.Initialize(input, playerSettings);
-            weaponController.Initialize(input, playerSettings, weaponsDatabase);
+            _playerMovement.Initialize(input, _playerSettings);
+            _weaponController.Initialize(input, _playerSettings, _weaponsDatabase);
+        }
+        
+        private void OnDestroy()
+        {
+            _weaponController.CleanUp();
         }
     }
 }
