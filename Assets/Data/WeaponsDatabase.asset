@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38bd2863ab3bb444865e86713646b81, type: 3}
   m_Name: WeaponsDatabase
   m_EditorClassIdentifier: 
-  weaponsDefinitions:
+  _weaponsDefinitions:
   - {fileID: 2385952445100235907, guid: c59ea63e9ccebb04480cdef71485fb18, type: 3}

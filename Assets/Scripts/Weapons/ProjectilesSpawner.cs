@@ -1,17 +1,18 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace IsoShooter.Weapons
 {
     public class ProjectilesSpawner : MonoBehaviour
     {
-        //in production code this would be be done with object pooling
-    
         [SerializeField]
-        private Projectile projectilePrefab;
+        private Projectile _projectilePrefab;
 
+        
         public Projectile SpawnProjectile(Vector3 position, Quaternion rotation)
         {
-            return Instantiate(projectilePrefab, position, rotation, transform);
+            //in production code this would be be done with object pooling
+            return Instantiate(_projectilePrefab, position, rotation, transform);
         }
     }
 }

@@ -1,17 +1,18 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace IsoShooter.Weapons
 {
     public abstract class Weapon : MonoBehaviour
     {
         [SerializeField]
-        private string weaponId;
+        private string _weaponId;
         [SerializeField]
-        private string weaponDisplayName;
+        private string _weaponDisplayName;
 
     
-        public string WeaponId => weaponId;
-        public string WeaponDisplayName => weaponDisplayName;
+        public string WeaponId => _weaponId;
+        public string WeaponDisplayName => _weaponDisplayName;
 
 
         public virtual void InitializeWeapon()

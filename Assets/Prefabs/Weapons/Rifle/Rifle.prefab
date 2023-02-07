@@ -175,8 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c4b226a0b8f0a4a845b0a4feeb3dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponId: Rifle
-  weaponDisplayName: 
+  _weaponId: Rifle
+  _weaponDisplayName: 
   projectilesSpawner: {fileID: 3444119167667595309}
   magazineCapacity: 30
   reloadTime: 2
@@ -198,5 +198,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567b2d9200c39b1438f98bd3c720afa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 7730652050335134768, guid: 8188dfecb9189b241a2b571f150e849f,
+  _projectilePrefab: {fileID: 7730652050335134768, guid: 8188dfecb9189b241a2b571f150e849f,
     type: 3}

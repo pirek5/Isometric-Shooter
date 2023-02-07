@@ -8,14 +8,18 @@ public class GameManager : MonoBehaviour
 {
 	[SerializeField]
 	private List<GameObject> _instancedGameObjects;
+	[SerializeField]
+	private List<ScriptableObject> _scriptableObjects;
 
 	private Dictionary<Type, InstancedSystem> _instancedSystems;
+	private Dictionary<Type, ScriptableObject> _scriptableObjectsToInject;
 
 	private readonly List<ISceneInjectee> _cachedInjectes = new List<ISceneInjectee>();
 
 	private void Awake()
 	{
 		InstantiateSystems();
+		
 		InjectDependencies();
 		InitializeSystems();
 		CallOnSystemsInitialized();
@@ -63,6 +67,10 @@ public class GameManager : MonoBehaviour
 				if (_instancedSystems.ContainsKey(property.FieldType))
 				{
 					property.SetValue(obj, _instancedSystems[property.FieldType]);
+				}
+				else if (_scriptableObjectsToInject.ContainsKey(property.FieldType))
+				{
+					property.SetValue(obj, _scriptableObjectsToInject[property.FieldType]);
 				}
 			}
 

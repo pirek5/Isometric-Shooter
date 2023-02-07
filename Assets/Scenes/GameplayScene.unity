@@ -849,7 +849,7 @@ PrefabInstance:
     - target: {fileID: 2950253136350302403, guid: eee1266539b33ec45a4f75f584d33b8d,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 1309
+      value: 1312
       objectReference: {fileID: 0}
     - target: {fileID: 3170402554750760742, guid: eee1266539b33ec45a4f75f584d33b8d,
         type: 3}
@@ -869,7 +869,7 @@ PrefabInstance:
     - target: {fileID: 4248340985816995395, guid: eee1266539b33ec45a4f75f584d33b8d,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 2885
+      value: 2888
       objectReference: {fileID: 0}
     - target: {fileID: 4248340985816995395, guid: eee1266539b33ec45a4f75f584d33b8d,
         type: 3}
@@ -1394,12 +1394,17 @@ PrefabInstance:
     - target: {fileID: 8021976027943007585, guid: eee1266539b33ec45a4f75f584d33b8d,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 1089
+      value: 1092
       objectReference: {fileID: 0}
     - target: {fileID: 8840932980977315114, guid: eee1266539b33ec45a4f75f584d33b8d,
         type: 3}
       propertyPath: m_Name
       value: Enviroment
+      objectReference: {fileID: 0}
+    - target: {fileID: 8840932980977315114, guid: eee1266539b33ec45a4f75f584d33b8d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eee1266539b33ec45a4f75f584d33b8d, type: 3}
@@ -1419,6 +1424,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5830398920776922657, guid: 9f725a13e7593c647a18c381d4817e70,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 6280195901054651635, guid: 9f725a13e7593c647a18c381d4817e70,
         type: 3}
