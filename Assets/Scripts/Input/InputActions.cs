@@ -37,6 +37,24 @@ namespace IsoShooter
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""67ebe7d4-1cf6-4d40-bae8-95402408e72a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Reaload"",
+                    ""type"": ""Button"",
+                    ""id"": ""625de710-6359-4533-a5ef-2a821c565cd4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -149,6 +167,28 @@ namespace IsoShooter
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""83dccd4f-24ea-41f9-a4f6-2ccce1098ae4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb0ac80b-71cc-4a48-bf5e-75fc7512fde9"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reaload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -158,6 +198,8 @@ namespace IsoShooter
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+            m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
+            m_Player_Reaload = m_Player.FindAction("Reaload", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -218,11 +260,15 @@ namespace IsoShooter
         private readonly InputActionMap m_Player;
         private IPlayerActions m_PlayerActionsCallbackInterface;
         private readonly InputAction m_Player_Movement;
+        private readonly InputAction m_Player_Fire;
+        private readonly InputAction m_Player_Reaload;
         public struct PlayerActions
         {
             private @InputActions m_Wrapper;
             public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
+            public InputAction @Fire => m_Wrapper.m_Player_Fire;
+            public InputAction @Reaload => m_Wrapper.m_Player_Reaload;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -235,6 +281,12 @@ namespace IsoShooter
                     @Movement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                     @Movement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
                     @Movement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMovement;
+                    @Fire.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                    @Fire.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                    @Fire.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFire;
+                    @Reaload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReaload;
+                    @Reaload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReaload;
+                    @Reaload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReaload;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -242,6 +294,12 @@ namespace IsoShooter
                     @Movement.started += instance.OnMovement;
                     @Movement.performed += instance.OnMovement;
                     @Movement.canceled += instance.OnMovement;
+                    @Fire.started += instance.OnFire;
+                    @Fire.performed += instance.OnFire;
+                    @Fire.canceled += instance.OnFire;
+                    @Reaload.started += instance.OnReaload;
+                    @Reaload.performed += instance.OnReaload;
+                    @Reaload.canceled += instance.OnReaload;
                 }
             }
         }
@@ -249,6 +307,8 @@ namespace IsoShooter
         public interface IPlayerActions
         {
             void OnMovement(InputAction.CallbackContext context);
+            void OnFire(InputAction.CallbackContext context);
+            void OnReaload(InputAction.CallbackContext context);
         }
     }
 }
