@@ -14,12 +14,15 @@ namespace IsoShooter.Player
         [WeaponId]
         [SerializeField]
         private string _startingWeapon;
+        [SerializeField]
+        private Ability _startingAbility;
 
-        
+
         public float MovementSpeed => _movementSpeed;
         public float MinGunAimingDistance => _minGunAimingDistance;
         public float MinAimingHeight => _minAimingHeight;
         public string StartingWeapon => _startingWeapon;
+        public Ability StartingAbility => _startingAbility;
     }
 }
 

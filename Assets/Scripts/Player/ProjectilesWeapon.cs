@@ -24,6 +24,7 @@ public class ProjectilesWeapon : Weapon
     
     public override void InitializeWeapon()
     {
+        projectilesLeftInMagazine = magazineCapacity;
     }
 
     public override void HandleReloadPerformed()
@@ -79,8 +80,6 @@ public class ProjectilesWeapon : Weapon
 
         public float Speed => projectileSpeed;
         public int Damage => projectileDamage;
-        public float ProjectileSpeed => projectileSpeed;
-        public int ProjectileDamage => projectileDamage;
         public GameObject HitFx => hitFx;
         public AudioClip HitSfx => hitSfx;
     } 

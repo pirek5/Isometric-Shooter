@@ -6,8 +6,6 @@ namespace IsoShooter.Player
     public class PlayerWeaponController : MonoBehaviour
     {
         [SerializeField]
-        private string _selectedWeapon;
-        [SerializeField]
         private Transform _weaponSlot;
         
         private PlayerSettings _playerSettings;
@@ -42,7 +40,7 @@ namespace IsoShooter.Player
 
         private void CreateSelectedWeapon()
         {
-            Weapon weaponPrefab = _weaponsDatabase.GetWeaponPrefab(_selectedWeapon);
+            Weapon weaponPrefab = _weaponsDatabase.GetWeaponPrefab(_playerSettings.StartingWeapon);
             _currentWeapon = Instantiate(weaponPrefab, _weaponSlot);
             _currentWeapon.InitializeWeapon();
         }

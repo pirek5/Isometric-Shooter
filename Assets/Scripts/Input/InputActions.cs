@@ -55,6 +55,15 @@ namespace IsoShooter
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ability"",
+                    ""type"": ""Button"",
+                    ""id"": ""21232430-4151-4ff4-882f-e0f8c733a5a8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -189,6 +198,17 @@ namespace IsoShooter
                     ""action"": ""Reaload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1d54f6ab-c96f-4b90-9c15-73a62a63fb54"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ability"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -200,6 +220,7 @@ namespace IsoShooter
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
             m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
             m_Player_Reaload = m_Player.FindAction("Reaload", throwIfNotFound: true);
+            m_Player_Ability = m_Player.FindAction("Ability", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -262,6 +283,7 @@ namespace IsoShooter
         private readonly InputAction m_Player_Movement;
         private readonly InputAction m_Player_Fire;
         private readonly InputAction m_Player_Reaload;
+        private readonly InputAction m_Player_Ability;
         public struct PlayerActions
         {
             private @InputActions m_Wrapper;
@@ -269,6 +291,7 @@ namespace IsoShooter
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
             public InputAction @Fire => m_Wrapper.m_Player_Fire;
             public InputAction @Reaload => m_Wrapper.m_Player_Reaload;
+            public InputAction @Ability => m_Wrapper.m_Player_Ability;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -287,6 +310,9 @@ namespace IsoShooter
                     @Reaload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReaload;
                     @Reaload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReaload;
                     @Reaload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReaload;
+                    @Ability.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility;
+                    @Ability.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility;
+                    @Ability.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbility;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -300,6 +326,9 @@ namespace IsoShooter
                     @Reaload.started += instance.OnReaload;
                     @Reaload.performed += instance.OnReaload;
                     @Reaload.canceled += instance.OnReaload;
+                    @Ability.started += instance.OnAbility;
+                    @Ability.performed += instance.OnAbility;
+                    @Ability.canceled += instance.OnAbility;
                 }
             }
         }
@@ -309,6 +338,7 @@ namespace IsoShooter
             void OnMovement(InputAction.CallbackContext context);
             void OnFire(InputAction.CallbackContext context);
             void OnReaload(InputAction.CallbackContext context);
+            void OnAbility(InputAction.CallbackContext context);
         }
     }
 }

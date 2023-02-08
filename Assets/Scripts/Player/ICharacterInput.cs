@@ -8,6 +8,7 @@ namespace IsoShooter.Player
         public event Action OnReloadPerformed;
         public event Action OnFireCanceled;
         public event Action OnFirePerformed;
+        public event Action OnAbilityPerformed;
         public Vector3 MovementInput { get; }
         public Vector3 AimDestination { get; }
     }

@@ -4,17 +4,19 @@ namespace IsoShooter.Weapons
 {
     public class Projectile : MonoBehaviour
     {
-        private float _projectileSpeed;
-        private int _damage;
+        [SerializeField]
+        private AudioSource audioSource;
+        
+        private ProjectilesWeapon.ProjectileSettings _settings;
         private Transform _transform;
 
         private Vector3 _lastPosition;
     
+        
         public void SetProjectileProperties(ProjectilesWeapon.ProjectileSettings projectileSettings)
         {
             _transform = GetComponent<Transform>();
-            _projectileSpeed = projectileSettings.Speed;
-            _damage = projectileSettings.Damage;
+            _settings = projectileSettings;
         }
 
         private void Update()
@@ -26,7 +28,7 @@ namespace IsoShooter.Weapons
         private void HandleMovement()
         {
             _lastPosition = _transform.position;
-            _transform.Translate(Vector3.forward * Time.deltaTime * _projectileSpeed);
+            _transform.Translate(Vector3.forward * Time.deltaTime * _settings.Speed);
         }
 
         private void HandleCollisions()
@@ -44,10 +46,20 @@ namespace IsoShooter.Weapons
         {
             if(hitInfo.collider.TryGetComponent(out IDamageable damageable))
             {
-                damageable.HandleDamage(_damage);
+                damageable.HandleDamage(_settings.Damage);
             }
 
-            //in production code this would be be done with object pooling
+            if (_settings.HitSfx != null)
+            {
+                audioSource.PlayOneShot(_settings.HitSfx);
+            }
+            
+            //in production code this should be be done with object pooling
+            if (_settings.HitFx != null)
+            {
+                Instantiate(_settings.HitFx, hitInfo.point, Quaternion.identity);
+            }
+            
             Destroy(gameObject);
         }
     }

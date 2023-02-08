@@ -34,6 +34,10 @@ public class WeaponAttributeDrawer : PropertyDrawer
       }
 
       _selectedIndex = EditorGUI.Popup(position, property.displayName, _selectedIndex, choices);
+      if(choices.Length == 0)
+         return;
+      
+      property.stringValue = choices[_selectedIndex];
    }
 
    private void CreateChoices()
