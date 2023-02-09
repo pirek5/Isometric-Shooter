@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace IsoShooter.Player
 {
-    public class PlayerInput : MonoBehaviour, ISceneInjectee, ICharacterInput
+    public class PlayerInput : MonoBehaviour, ISceneInjectee, IWeaponInput, IMovementInput, IInteractionsInput, IAbilitiesInput
     {
         public event Action OnReloadPerformed;
         public event Action OnFireCanceled;

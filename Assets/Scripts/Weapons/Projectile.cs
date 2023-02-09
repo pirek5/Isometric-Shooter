@@ -1,3 +1,4 @@
+using IsoShooter.Player;
 using UnityEngine;
 
 namespace IsoShooter.Weapons
@@ -5,7 +6,7 @@ namespace IsoShooter.Weapons
     public class Projectile : MonoBehaviour
     {
         [SerializeField]
-        private AudioSource audioSource;
+        private AudioSource _audioSource;
         
         private ProjectilesWeapon.ProjectileSettings _settings;
         private Transform _transform;
@@ -49,18 +50,23 @@ namespace IsoShooter.Weapons
                 damageable.HandleDamage(_settings.Damage);
             }
 
-            if (_settings.HitSfx != null)
+            //"prototype-kind-of-code"///
+            HandleSpecialEffects(hitInfo.point);
+            Destroy(gameObject);
+            //////////////////////////
+        }
+
+        private void HandleSpecialEffects(Vector3 position)
+        {
+            if (_settings.HitFx == null) 
+                return;
+            
+            GameObject vfx = Instantiate(_settings.HitFx, position, Quaternion.identity);
+
+            if(vfx.TryGetComponent(out AudioSource audioSource))
             {
                 audioSource.PlayOneShot(_settings.HitSfx);
             }
-            
-            //in production code this should be be done with object pooling
-            if (_settings.HitFx != null)
-            {
-                Instantiate(_settings.HitFx, hitInfo.point, Quaternion.identity);
-            }
-            
-            Destroy(gameObject);
         }
     }
 }

@@ -1,57 +1,61 @@
 using IsoShooter.Interactions;
-using IsoShooter.Player;
 using UnityEngine;
 
-public class PlayerInteractionsController : MonoBehaviour
+namespace IsoShooter.Player
 {
-    [SerializeField]
-    private LayerMask _interactableLayer;
-    [SerializeField]
-    private float _maxRange;
-    [SerializeField]
-    private Transform interactionsTransform;
-
-    private IInteractable _currentInteractable;
-    private ICharacterInput _characterInput;
-
-    public void Initialize(ICharacterInput characterInput)
+    public class PlayerInteractionsController : MonoBehaviour
     {
-        _characterInput = characterInput;
-        _characterInput.OnInteractPerformed += TryInteract;
-    }
-
-    public void CleanUp()
-    {
-        _characterInput.OnInteractPerformed -= TryInteract;
-    }
+        [SerializeField]
+        private LayerMask _interactableLayer;
+        [SerializeField]
+        private float _maxRange;
+        [SerializeField]
+        private Transform interactionsTransform;
     
-    public void Update()
-    {
-        HandleInteractableObjects();
-    }
-
-    private void HandleInteractableObjects()
-    {
-        if (Physics.Raycast(interactionsTransform.position, interactionsTransform.forward, out RaycastHit hit, _maxRange, _interactableLayer))
+        private IInteractable _currentInteractable;
+        private IInteractionsInput _interactionsInput;
+    
+        public void Initialize(IInteractionsInput interactionsInput)
         {
-            IInteractable newInteractable = hit.collider.GetComponent<IInteractable>();
-            
-            if(_currentInteractable == newInteractable)
-                return;
-            
-            _currentInteractable?.OnExit();
-            _currentInteractable = newInteractable;
-            _currentInteractable?.OnEnter();
+            _interactionsInput = interactionsInput;
+            _interactionsInput.OnInteractPerformed += TryInteract;
         }
-        else
+    
+        public void CleanUp()
         {
-            _currentInteractable?.OnExit();
-            _currentInteractable = null;
+            _interactionsInput.OnInteractPerformed -= TryInteract;
         }
-    }
-
-    private void TryInteract()
-    {
-        _currentInteractable?.Interact();
+        
+        public void Update()
+        {
+            HandleInteractableObjects();
+        }
+    
+        private void HandleInteractableObjects()
+        {
+            if (Physics.Raycast(interactionsTransform.position, interactionsTransform.forward, out RaycastHit hit, _maxRange, _interactableLayer))
+            {
+                IInteractable newInteractable = hit.collider.GetComponent<IInteractable>();
+                
+                if(_currentInteractable == newInteractable)
+                    return;
+                
+                _currentInteractable?.OnExit();
+                _currentInteractable = newInteractable;
+                _currentInteractable?.OnEnter();
+            }
+            else
+            {
+                _currentInteractable?.OnExit();
+                _currentInteractable = null;
+            }
+        }
+    
+        private void TryInteract()
+        {
+            _currentInteractable?.Interact();
+        }
     }
 }
+
+

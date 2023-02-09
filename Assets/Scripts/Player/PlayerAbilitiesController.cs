@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using IsoShooter.Abilities;
 using MEC;
 using UnityEngine;
 
@@ -8,9 +9,12 @@ namespace IsoShooter.Player
     public class PlayerAbilitiesController : MonoBehaviour
     {
         public event Action<Ability> OnAbilityChanged;
-        public event Action OnAbilityStatusChanged; 
+        public event Action OnAbilityStatusChanged;
         
-        private ICharacterInput _playerInput;
+        [SerializeField]
+        private AudioSource _audioSource;
+        
+        private IAbilitiesInput _abilitiesInput;
         private PlayerSettings _playerSettings;
         
         private bool _isOnCooldown;
@@ -20,19 +24,19 @@ namespace IsoShooter.Player
         public Ability CurrentAbility { get; private set; }
 
         
-        public void Initialize(ICharacterInput characterInput, PlayerSettings playerSettings)
+        public void Initialize(IAbilitiesInput abilitiesInput, PlayerSettings playerSettings)
         {
-            _playerInput = characterInput;
+            _abilitiesInput = abilitiesInput;
             _playerSettings = playerSettings;
 
             TrySelectAbility();
 
-            _playerInput.OnAbilityPerformed += TryPerformAbility;
+            _abilitiesInput.OnAbilityPerformed += TryPerformAbility;
         }
 
         public void CleanUp()
         {
-            _playerInput.OnAbilityPerformed -= TryPerformAbility;
+            _abilitiesInput.OnAbilityPerformed -= TryPerformAbility;
         }
         
         public AbilityStatus GetAbilityStatus()
@@ -59,8 +63,9 @@ namespace IsoShooter.Player
             if(CurrentAbility == null || _isOnCooldown)
                 return;
             
-            CurrentAbility.Perform(gameObject, _playerInput.AimDestination);
+            CurrentAbility.Perform(gameObject, _abilitiesInput.AimDestination);
             Timing.RunCoroutine(CooldownCoroutine());
+            _audioSource.PlayOneShot(CurrentAbility.AbilityPerformSound);
         }
 
         private IEnumerator<float> CooldownCoroutine()

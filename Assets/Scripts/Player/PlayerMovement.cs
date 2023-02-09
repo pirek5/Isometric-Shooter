@@ -8,12 +8,12 @@ namespace IsoShooter.Player
         private Rigidbody _rigidBody;
 
         private PlayerSettings _playerSettings;
-        private ICharacterInput _playerInput;
+        private IMovementInput _movementInput;
 
 
-        public void Initialize(ICharacterInput characterInput, PlayerSettings playerSettings)
+        public void Initialize(IMovementInput weaponInput, PlayerSettings playerSettings)
         {
-            _playerInput = characterInput;
+            _movementInput = weaponInput;
             _playerSettings = playerSettings;
         }
 
@@ -30,12 +30,12 @@ namespace IsoShooter.Player
 
         private void MovePlayer()
         {
-            _rigidBody.MovePosition(transform.position + _playerInput.MovementInput * _playerSettings.MovementSpeed * Time.fixedDeltaTime);
+            _rigidBody.MovePosition(transform.position + _movementInput.MovementInput * _playerSettings.MovementSpeed * Time.fixedDeltaTime);
         }
 
         private void RotatePlayer()
         {
-            Vector3 rotDestination = new Vector3(_playerInput.AimDestination.x, transform.position.y, _playerInput.AimDestination.z) - transform.position;
+            Vector3 rotDestination = new Vector3(_movementInput.AimDestination.x, transform.position.y, _movementInput.AimDestination.z) - transform.position;
             Quaternion playerRotation = Quaternion.LookRotation(rotDestination, Vector3.up);
             _rigidBody.MoveRotation(playerRotation);
         }

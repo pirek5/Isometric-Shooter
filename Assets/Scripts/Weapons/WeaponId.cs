@@ -1,6 +1,10 @@
 using UnityEngine;
 
-
-public class WeaponId : PropertyAttribute
+namespace IsoShooter.Weapons
 {
+    public class WeaponId : PropertyAttribute
+    {
+    }
 }
+
+

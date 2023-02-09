@@ -1,11 +1,16 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "IsometricShooter/Abilities/Teleport")]
-[System.Serializable]
-public class TeleportAbility : Ability
+namespace IsoShooter.Abilities
 {
-    public override void Perform(GameObject performer, Vector3 abilityTargetPosition)
+    [CreateAssetMenu(menuName = "IsometricShooter/Abilities/Teleport")]
+    [System.Serializable]
+    public class TeleportAbility : Ability
     {
-        performer.transform.position = abilityTargetPosition;
+        public override void Perform(GameObject performer, Vector3 abilityTargetPosition)
+        {
+            performer.transform.position = abilityTargetPosition;
+        }
     }
+
 }
+

@@ -13,29 +13,29 @@ namespace IsoShooter.Player
         
         private PlayerSettings _playerSettings;
         private WeaponsDatabase _weaponsDatabase;
-        private ICharacterInput _playerInput;
+        private IWeaponInput _weaponInput;
         
         
         public Weapon CurrentWeapon { get; private set; }
 
 
-        public void Initialize(ICharacterInput input, PlayerSettings playerSettings, WeaponsDatabase weaponsDatabase)
+        public void Initialize(IWeaponInput input, PlayerSettings playerSettings, WeaponsDatabase weaponsDatabase)
         {
             _playerSettings = playerSettings;
             _weaponsDatabase = weaponsDatabase;
-            _playerInput = input;
+            _weaponInput = input;
             CreateSelectedWeapon();
             
-            _playerInput.OnFirePerformed += HandleFirePerformed;
-            _playerInput.OnFireCanceled += HandleFireCanceled;
-            _playerInput.OnReloadPerformed += HandleReloadPerformed;
+            _weaponInput.OnFirePerformed += HandleFirePerformed;
+            _weaponInput.OnFireCanceled += HandleFireCanceled;
+            _weaponInput.OnReloadPerformed += HandleReloadPerformed;
         }
 
         public void CleanUp()
         {
-            _playerInput.OnFirePerformed -= HandleFirePerformed;
-            _playerInput.OnFireCanceled -= HandleFireCanceled;
-            _playerInput.OnReloadPerformed -= HandleReloadPerformed;
+            _weaponInput.OnFirePerformed -= HandleFirePerformed;
+            _weaponInput.OnFireCanceled -= HandleFireCanceled;
+            _weaponInput.OnReloadPerformed -= HandleReloadPerformed;
         }
 
         private void Update()
@@ -80,17 +80,13 @@ namespace IsoShooter.Player
             if(CurrentWeapon == null)
                 return;
             
-            Vector3 gunAimPosition = _playerInput.AimDestination;
-            if (gunAimPosition.y < _playerSettings.MinAimingHeight)
-            {
-                gunAimPosition = new Vector3(gunAimPosition.x, _playerSettings.MinAimingHeight, gunAimPosition.z);
-            }
-                
+            Vector3 gunAimPosition = _weaponInput.AimDestination;
+
             float distanceToAim = Vector3.Distance(_weaponSlot.position, gunAimPosition);
             if(distanceToAim < _playerSettings.MinGunAimingDistance)
                 return;
                 
-            CurrentWeapon.transform.LookAt(_playerInput.AimDestination);
+            CurrentWeapon.transform.LookAt(_weaponInput.AimDestination);
         }
     }
 }

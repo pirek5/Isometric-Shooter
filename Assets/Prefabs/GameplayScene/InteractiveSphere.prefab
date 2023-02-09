@@ -347,9 +347,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdca17868e6c00c41af1a4ae57eea6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floatingText: {fileID: 7592051723355589293}
-  objectRenderer: {fileID: 4370253506656668385}
+  _floatingText: {fileID: 7592051723355589293}
+  _objectRenderer: {fileID: 4370253506656668385}
   _standardText: Come to interact with me!
   _onEnterText: Press space to activate
   _activatedText: Activated
-  activatedColor: {r: 1, g: 0.8341396, b: 0, a: 1}
+  _activatedColor: {r: 1, g: 0.7986406, b: 0, a: 1}

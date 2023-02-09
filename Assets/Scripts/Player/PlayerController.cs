@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IsoShooter.Player
 {
-    public class PlayerInitializer : MonoBehaviour, ISceneInjectee
+    public class PlayerController : MonoBehaviour, ISceneInjectee
     {
         [SerializeField]
         private PlayerMovement _playerMovement;
@@ -24,10 +24,12 @@ namespace IsoShooter.Player
         public void OnInjected()
         {
             InitializeAssignedControllers();
+            AttachEvents();
         }
         
         private void OnDestroy()
         {
+            DetachEvents();
             CleanUpControllers();
         }
         
@@ -38,6 +40,22 @@ namespace IsoShooter.Player
             _abilityController = GetComponentInChildren<PlayerAbilitiesController>();
             _healthController = GetComponentInChildren<HealthController>();
             _interactionsController = GetComponentInChildren<PlayerInteractionsController>();
+        }
+
+        private void AttachEvents()
+        {
+            if (_healthController != null)
+            {
+                _healthController.OnHealthDepleted += DestroyPlayer;
+            }
+        }
+
+        private void DetachEvents()
+        {
+            if (_healthController != null)
+            {
+                _healthController.OnHealthDepleted -= DestroyPlayer;
+            }
         }
 
         private void InitializeAssignedControllers()
@@ -88,6 +106,11 @@ namespace IsoShooter.Player
             {
                 _interactionsController.CleanUp();
             }
+        }
+        
+        private void DestroyPlayer()
+        {
+            Destroy(gameObject);
         }
     }
 }

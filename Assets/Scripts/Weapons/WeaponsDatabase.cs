@@ -7,7 +7,7 @@ namespace IsoShooter.Weapons
     [CreateAssetMenu(menuName = "IsometricShooter/WeaponsDatabase")]
     public class WeaponsDatabase : ScriptableObject
     {
-        private static readonly string databasePath = "Assets/Data/WeaponsDatabase.asset"; //not ideal solution
+        private static readonly string _databasePath = "Assets/Data/WeaponsDatabase.asset"; //not ideal solution
         
         [SerializeField]
         private List<GameObject> _weaponsDefinitions;
@@ -70,7 +70,7 @@ namespace IsoShooter.Weapons
         
         private static WeaponsDatabase GetCurrentDatabase()
         {
-            return AssetDatabase.LoadAssetAtPath<WeaponsDatabase>(databasePath);
+            return AssetDatabase.LoadAssetAtPath<WeaponsDatabase>(_databasePath);
         }
 #endif
     }

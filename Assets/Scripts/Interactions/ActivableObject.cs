@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -7,9 +6,9 @@ namespace IsoShooter.Interactions
     public class ActivableObject : MonoBehaviour, IInteractable
     {
         [SerializeField]
-        private TextMeshProUGUI floatingText;
+        private TextMeshProUGUI _floatingText;
         [SerializeField]
-        private Renderer objectRenderer;
+        private Renderer _objectRenderer;
         [Space]
         [SerializeField]
         private string _standardText;
@@ -18,41 +17,40 @@ namespace IsoShooter.Interactions
         [SerializeField]
         private string _activatedText;
         [SerializeField]
-        private Color activatedColor;
+        private Color _activatedColor;
         
-        
-        private bool wasActivated;
+        private bool _wasActivated;
 
 
         private void Awake()
         {
-            floatingText.SetText(_standardText);
+            _floatingText.SetText(_standardText);
         }
 
         public void OnEnter()
         {
-            if(wasActivated)
+            if(_wasActivated)
                 return;
         
-            floatingText.SetText(_onEnterText);
+            _floatingText.SetText(_onEnterText);
         }
 
         public void OnExit()
         {
-            if(wasActivated)
+            if(_wasActivated)
                 return;
         
-            floatingText.SetText(_standardText);
+            _floatingText.SetText(_standardText);
         }
 
         public void Interact()
         {
-            if(wasActivated)
+            if(_wasActivated)
                 return;
         
-            wasActivated = true;
-            objectRenderer.material.color = activatedColor;
-            floatingText.SetText(_activatedText);
+            _wasActivated = true;
+            _objectRenderer.material.color = _activatedColor;
+            _floatingText.SetText(_activatedText);
         }
     }
 }
