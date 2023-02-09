@@ -7,19 +7,19 @@ namespace IsoShooter.Weapons.Editor
     public class WeaponAttributeDrawer : PropertyDrawer
     {
         private int _selectedIndex;
-        private string[] choices;
+        private string[] _choices;
 
 
         private string[] Choices
         {
             get
             {
-                if (choices == null)
+                if (_choices == null)
                 {
                     CreateChoices();
                 }
 
-                return choices;
+                return _choices;
             }
         }
    
@@ -34,16 +34,16 @@ namespace IsoShooter.Weapons.Editor
                 _selectedIndex = i;
             }
 
-            _selectedIndex = EditorGUI.Popup(position, property.displayName, _selectedIndex, choices);
-            if(choices.Length == 0)
+            _selectedIndex = EditorGUI.Popup(position, property.displayName, _selectedIndex, _choices);
+            if(_choices.Length == 0)
                 return;
       
-            property.stringValue = choices[_selectedIndex];
+            property.stringValue = _choices[_selectedIndex];
         }
 
         private void CreateChoices()
         {
-            choices = WeaponsDatabase.GetAllWeaponsIds().ToArray();
+            _choices = WeaponsDatabase.GetAllWeaponsIds().ToArray();
         }
     }
 

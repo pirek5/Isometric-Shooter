@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
 	private readonly List<ISceneInjectee> _cachedInjectes = new List<ISceneInjectee>();
 
+	
 	private void Awake()
 	{
 		InstantiateSystems();

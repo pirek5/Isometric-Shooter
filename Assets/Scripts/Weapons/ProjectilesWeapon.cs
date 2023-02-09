@@ -101,7 +101,7 @@ namespace IsoShooter.Weapons
         }
 
 
-        [System.Serializable]
+        [Serializable]
         public class ProjectileSettings
         {
             [SerializeField]
