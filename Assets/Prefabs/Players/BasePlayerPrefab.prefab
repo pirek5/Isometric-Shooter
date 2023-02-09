@@ -10,13 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 367505680059114606}
   - component: {fileID: 367505680059114605}
-  - component: {fileID: 367505680059114607}
   - component: {fileID: 367505680059114609}
   - component: {fileID: 367505680059114600}
   - component: {fileID: 7418441538683256742}
   - component: {fileID: 367505680059114601}
   m_Layer: 0
-  m_Name: Player
+  m_Name: BasePlayerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53,20 +52,8 @@ MonoBehaviour:
   _playerMovement: {fileID: 367505680059114600}
   _weaponController: {fileID: 7418441538683256742}
   _abilityController: {fileID: 367505680059114609}
+  _healthController: {fileID: 7083407900769583630}
   _playerSettings: {fileID: 11400000, guid: dec27d0fe00ed244caeab219452ee4df, type: 2}
---- !u!114 &367505680059114607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 367505680059114615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aa8c524353258847af08ce278e0cbce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentCamera: {fileID: 0}
 --- !u!114 &367505680059114609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +151,7 @@ GameObject:
   - component: {fileID: 8488668610910848259}
   - component: {fileID: 973681977902499152}
   - component: {fileID: 497251086762363234}
+  - component: {fileID: 7083407900769583630}
   m_Layer: 0
   m_Name: HeightOffset
   m_TagString: Untagged
@@ -252,6 +240,18 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7083407900769583630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4734397984544191700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f3a3ccba01a64e40a188efb209ec4e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7858979969833230527
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +314,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eee4e94c241fcd54a9614039689d086f, type: 2}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

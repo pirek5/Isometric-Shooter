@@ -15,5 +15,6 @@ MonoBehaviour:
   _movementSpeed: 7
   _minGunAimingDistance: 3
   _minAimingHeight: 1
+  _health: 10
   _startingWeapon: Rifle
   _startingAbility: {fileID: 11400000, guid: 9d6ed418537ec4d4f87c6e29be33d3fe, type: 2}

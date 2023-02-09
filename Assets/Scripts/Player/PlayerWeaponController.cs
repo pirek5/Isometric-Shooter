@@ -1,3 +1,4 @@
+using System;
 using IsoShooter.Weapons;
 using UnityEngine;
 
@@ -5,13 +6,17 @@ namespace IsoShooter.Player
 {
     public class PlayerWeaponController : MonoBehaviour
     {
+        public event Action<Weapon> OnWeaponChanged;
+        
         [SerializeField]
         private Transform _weaponSlot;
         
         private PlayerSettings _playerSettings;
         private WeaponsDatabase _weaponsDatabase;
         private ICharacterInput _playerInput;
-        private Weapon _currentWeapon;
+        
+        
+        public Weapon CurrentWeapon { get; private set; }
 
 
         public void Initialize(ICharacterInput input, PlayerSettings playerSettings, WeaponsDatabase weaponsDatabase)
@@ -41,37 +46,38 @@ namespace IsoShooter.Player
         private void CreateSelectedWeapon()
         {
             Weapon weaponPrefab = _weaponsDatabase.GetWeaponPrefab(_playerSettings.StartingWeapon);
-            _currentWeapon = Instantiate(weaponPrefab, _weaponSlot);
-            _currentWeapon.InitializeWeapon();
+            CurrentWeapon = Instantiate(weaponPrefab, _weaponSlot);
+            CurrentWeapon.InitializeWeapon();
+            OnWeaponChanged?.Invoke(CurrentWeapon);
         }
 
         private void HandleFirePerformed()
         {
-            if(_currentWeapon == null)
+            if(CurrentWeapon == null)
                 return;
             
-            _currentWeapon.HandleFirePerformed();
+            CurrentWeapon.HandleFirePerformed();
         }
 
         private void HandleFireCanceled()
         {
-            if(_currentWeapon == null)
+            if(CurrentWeapon == null)
                 return;
             
-            _currentWeapon.HandleFireCanceled();
+            CurrentWeapon.HandleFireCanceled();
         }
 
         private void HandleReloadPerformed()
         {
-            if(_currentWeapon == null)
+            if(CurrentWeapon == null)
                 return;
             
-            _currentWeapon.HandleReloadPerformed();
+            CurrentWeapon.HandleReloadPerformed();
         }
         
         private void RotateGun()
         {
-            if(_currentWeapon == null)
+            if(CurrentWeapon == null)
                 return;
             
             Vector3 gunAimPosition = _playerInput.AimDestination;
@@ -84,7 +90,7 @@ namespace IsoShooter.Player
             if(distanceToAim < _playerSettings.MinGunAimingDistance)
                 return;
                 
-            _currentWeapon.transform.LookAt(_playerInput.AimDestination);
+            CurrentWeapon.transform.LookAt(_playerInput.AimDestination);
         }
     }
 }

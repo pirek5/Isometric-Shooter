@@ -11,6 +11,8 @@ namespace IsoShooter.Player
         private float _minGunAimingDistance;
         [SerializeField]
         private float _minAimingHeight;
+        [SerializeField]
+        private int _health;
         [WeaponId]
         [SerializeField]
         private string _startingWeapon;
@@ -21,6 +23,7 @@ namespace IsoShooter.Player
         public float MovementSpeed => _movementSpeed;
         public float MinGunAimingDistance => _minGunAimingDistance;
         public float MinAimingHeight => _minAimingHeight;
+        public int Health => _health;
         public string StartingWeapon => _startingWeapon;
         public Ability StartingAbility => _startingAbility;
     }
