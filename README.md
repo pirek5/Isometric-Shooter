@@ -8,6 +8,6 @@ key features:
 - abilities system
 
 To play select Scene/GameplayScene
--WSAD/Arrows to move
+- WSAD/Arrows to move
 - LMB to fire
 - RMB to use ability (Teleport)
