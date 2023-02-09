@@ -10,6 +10,7 @@ namespace IsoShooter.Player
         public event Action OnFireCanceled;
         public event Action OnFirePerformed;
         public event Action OnAbilityPerformed;
+        public event Action OnInteractPerformed;
 
         [SerializeField]
         private Camera _currentCamera;
@@ -32,6 +33,7 @@ namespace IsoShooter.Player
             _inputManager.InputActions.Player.Fire.canceled += NotifyAboutFireCanceled;
             _inputManager.InputActions.Player.Reaload.performed += NotifyAboutReloadPerformed;
             _inputManager.InputActions.Player.Ability.performed += NotifyAboutAbilityPerformed;
+            _inputManager.InputActions.Player.Interaction.performed += NotifyAboutInteractionPerformed;
 
             if (_currentCamera == null)
             {
@@ -55,6 +57,7 @@ namespace IsoShooter.Player
             _inputManager.InputActions.Player.Fire.canceled -= NotifyAboutFireCanceled;
             _inputManager.InputActions.Player.Reaload.performed -= NotifyAboutReloadPerformed;
             _inputManager.InputActions.Player.Ability.performed -= NotifyAboutAbilityPerformed;
+            _inputManager.InputActions.Player.Interaction.performed -= NotifyAboutInteractionPerformed;
         }
     
         private void GatherAimInput()
@@ -96,6 +99,11 @@ namespace IsoShooter.Player
         private void NotifyAboutAbilityPerformed(InputAction.CallbackContext callbackContext)
         {
            OnAbilityPerformed?.Invoke();
+        }
+        
+        private void NotifyAboutInteractionPerformed(InputAction.CallbackContext callbackContext)
+        {
+            OnInteractPerformed?.Invoke();
         }
     }
 }

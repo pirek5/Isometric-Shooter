@@ -53,6 +53,7 @@ MonoBehaviour:
   _weaponController: {fileID: 7418441538683256742}
   _abilityController: {fileID: 367505680059114609}
   _healthController: {fileID: 7083407900769583630}
+  _interactionsController: {fileID: 0}
   _playerSettings: {fileID: 11400000, guid: dec27d0fe00ed244caeab219452ee4df, type: 2}
 --- !u!114 &367505680059114609
 MonoBehaviour:
