@@ -32,6 +32,11 @@ namespace IsoShooter.Player
             _inputManager.InputActions.Player.Fire.canceled += NotifyAboutFireCanceled;
             _inputManager.InputActions.Player.Reaload.performed += NotifyAboutReloadPerformed;
             _inputManager.InputActions.Player.Ability.performed += NotifyAboutAbilityPerformed;
+
+            if (_currentCamera == null)
+            {
+                _currentCamera = Camera.main;
+            }
         }
 
         private void Update()

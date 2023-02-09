@@ -3,15 +3,13 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour, IDamageable, IDestructible
 {
-    public event Action OnBeforeDestroy;
     
-    [SerializeField]
-    public int maxHealth;
+    public event Action OnBeforeDestroy;
 
     private int currentHealth;
 
 
-    public void Initialize()
+    public void Initialize(int maxHealth)
     {
         currentHealth = maxHealth;
     }
