@@ -23,9 +23,7 @@ namespace IsoShooter.Player
 
         public void OnInjected()
         {
-            ICharacterInput input = GetComponentInChildren<ICharacterInput>();
-
-            InitializeAssignedControllers(input);
+            InitializeAssignedControllers();
         }
         
         private void OnDestroy()
@@ -42,26 +40,30 @@ namespace IsoShooter.Player
             _interactionsController = GetComponentInChildren<PlayerInteractionsController>();
         }
 
-        private void InitializeAssignedControllers(ICharacterInput input)
+        private void InitializeAssignedControllers()
         {
             if (_playerMovement != null)
             {
-                _playerMovement.Initialize(input, _playerSettings);
+                IMovementInput movementInput = GetComponentInChildren<IMovementInput>();
+                _playerMovement.Initialize(movementInput, _playerSettings);
             }
 
             if (_weaponController != null)
             {
-                _weaponController.Initialize(input, _playerSettings, _weaponsDatabase);
+                IWeaponInput weaponInput = GetComponentInChildren<IWeaponInput>();
+                _weaponController.Initialize(weaponInput, _playerSettings, _weaponsDatabase);
             }
 
             if (_abilityController != null)
             {
-                _abilityController.Initialize(input, _playerSettings);
+                IAbilitiesInput abilitiesInput = GetComponentInChildren<IAbilitiesInput>();
+                _abilityController.Initialize(abilitiesInput, _playerSettings);
             }
 
             if (_interactionsController != null)
             {
-                _interactionsController.Initialize(input);
+                IInteractionsInput interactionsInput = GetComponentInChildren<IInteractionsInput>();
+                _interactionsController.Initialize(interactionsInput);
             }
 
             if (_healthController != null)

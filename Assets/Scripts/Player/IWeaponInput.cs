@@ -14,4 +14,16 @@ namespace IsoShooter.Player
         public Vector3 MovementInput { get; }
         public Vector3 AimDestination { get; }
     }
+    
+    public interface IMovementInput
+    {
+        public event Action OnReloadPerformed;
+        public event Action OnFireCanceled;
+        public event Action OnFirePerformed;
+        public event Action OnAbilityPerformed;
+        public event Action OnInteractPerformed;
+        
+        public Vector3 MovementInput { get; }
+        public Vector3 AimDestination { get; }
+    }
 }

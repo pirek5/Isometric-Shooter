@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced0203f0aae9ee46b8adc1665bf1248, type: 3}
   m_Name: StandardTeleport
   m_EditorClassIdentifier: 
-  abilityCooldown: 2
-  abilityDisplayName: Teleport
+  _abilityCooldown: 2
+  _abilityDisplayName: Teleport
+  _abilityPerformSound: {fileID: 8300000, guid: cc6699269b4c1d44ea1e860518b9bb73,
+    type: 3}
